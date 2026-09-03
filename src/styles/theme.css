@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Smarters Freight — Design Tokens & Theme Management
+   ========================================================================== */
+
+/* DARK THEME (DEFAULT) */
+:root,
+[data-theme="dark"] {
+  /* Surface / Ink (Dark Asphalt) */
+  --ink-950: #0D1017;
+  --ink-900: #12151D;
+  --ink-800: #1A1E29;
+  --ink-700: #232838;
+  --ink-600: #2E3446;
+  --line: #313747;
+
+  /* Typography / Paper */
+  --paper: #E9EBF1;
+  --paper-dim: #9AA1B4;
+  --paper-faint: #6B7186;
+
+  /* Accents & Status Indicators */
+  --amber: #FFB020;
+  --amber-dim: #4A3714;
+  --signal: #33D6A6;
+  --signal-dim: #123B31;
+  --warn: #FF5D5D;
+  --warn-dim: #421A1A;
+  --info: #6EA8FE;
+  --info-dim: #16233F;
+
+  /* UI Cards Gradient */
+  --card-bg: linear-gradient(180deg, var(--ink-800), var(--ink-900));
+}
+
+/* LIGHT THEME OVERRIDES */
+[data-theme="light"] {
+  /* Surface (Light Paper Sheets) */
+  --ink-950: #F4F5F8;
+  --ink-900: #FFFFFF;
+  --ink-800: #EBEFF5;
+  --ink-700: #E0E5EE;
+  --ink-600: #CBD3E1;
+  --line: #D0D7E3;
+
+  /* Typography (Dark Waybill Ink) */
+  --paper: #0D1017;
+  --paper-dim: #4A5268;
+  --paper-faint: #737D96;
+
+  /* Accents & Status Indicators (Adjusted for Light Contrast) */
+  --amber: #D98200;
+  --amber-dim: #FFF3D6;
+  --signal: #0D9468;
+  --signal-dim: #E3F8F1;
+  --warn: #E02B2B;
+  --warn-dim: #FEEAEA;
+  --info: #2B6CB0;
+  --info-dim: #EBF3FE;
+
+  /* UI Cards Gradient */
+  --card-bg: linear-gradient(180deg, #FFFFFF, #F8FAFC);
+}
+
+/* ==========================================================================
+   Global Reset & Layout Rules
+   ========================================================================== */
+
+/* Typography Rules */
+:root {
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --sidebar-w: 232px;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ink-950);
+  color: var(--paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--amber); color: #0D1017; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--ink-600); border-radius: 8px; border: 2px solid var(--ink-950); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ==========================================================================
+   Utility Components & Controls
+   ========================================================================== */
+
+.mono { font-family: var(--font-mono); letter-spacing: 0.01em; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.badge--dot::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge--available   { color: var(--signal); background: var(--signal-dim); border-color: transparent; }
+.badge--booked      { color: var(--amber);  background: var(--amber-dim); border-color: transparent; }
+.badge--transit     { color: var(--info);   background: var(--info-dim); border-color: transparent; }
+.badge--maintenance { color: var(--paper-dim); background: var(--ink-700); border-color: transparent; }
+.badge--inactive    { color: var(--paper-faint); background: var(--ink-800); }
+.badge--rejected, .badge--cancelled { color: var(--warn); background: var(--warn-dim); border-color: transparent; }
+.badge--completed   { color: var(--signal); background: var(--signal-dim); border-color: transparent; }
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13.5px;
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  background: var(--ink-700);
+  color: var(--paper);
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .1s ease;
+}
+.btn:hover { border-color: var(--paper-faint); }
+.btn:active { transform: translateY(1px); }
+.btn--primary {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #FFFFFF;
+}
+.btn--primary:hover { opacity: 0.9; }
+.btn--ghost { background: transparent; }
+
+/* Form Inputs */
+input, select, textarea {
+  font-family: var(--font-body);
+  background: var(--ink-900);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  border-radius: var(--radius-sm);
+  padding: 9px 11px;
+  font-size: 14px;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--amber); }
+input::placeholder { color: var(--paper-faint); }
+
+/* Data Tables */
+table { border-collapse: collapse; width: 100%; }
+th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper-faint);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  vertical-align: middle;
+}
+tbody tr { transition: background .12s ease; }
+tbody tr:hover { background: var(--ink-800); }
